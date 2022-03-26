@@ -5,17 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 /**
- * Main activity user will see when first opening app.
- *
- * @author Kevin Ong, Vincent Zheng, Minh Trung Do
- * @version 1.0
+ * Empty Activity to be used for fragment showing listview details
  */
-
-public class MainActivity extends AppCompatActivity {
+public class EmptyActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_empty);
     }
 }
