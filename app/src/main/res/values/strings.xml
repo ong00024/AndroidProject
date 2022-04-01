@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">AndroidProject</string>
+    <string name="search">Search</string>
+    <string name="country">Country:</string>
+    <string name="countryHint">Enter a country</string>
+    <string name="start_date">Start Date:</string>
+    <string name="end_date">End Date:</string>
+
+
+    <string name="dateHint">Enter a date (YYYY-MM-DD)</string>
+    <string name="loadResults">Loading results</string>
+    <string name="savedDates">Saved Dates</string>
+
+    <string name="results">results will show here </string>
 </resources>
