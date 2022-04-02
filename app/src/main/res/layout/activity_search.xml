@@ -56,6 +56,14 @@
         android:text="@string/savedDates"/>
 
 
+    <ProgressBar
+        android:id="@+id/pb_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:padding="30dp"
+        android:visibility="invisible" />
+
     <!-- THIS WILL MOVE TO FRAGMENT LATER -->
 
     <TextView

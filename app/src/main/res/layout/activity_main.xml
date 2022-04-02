@@ -4,18 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:orientation="vertical">
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Covid-19 App" />
+        android:layout_gravity="center"
+        android:text="Covid-19 App"
+        android:paddingTop="200dp"/>
 
     <Button
         android:id="@+id/startApp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text = "Start"/>
+        android:layout_gravity="center"
+        android:text="Start" />
 
 </LinearLayout>

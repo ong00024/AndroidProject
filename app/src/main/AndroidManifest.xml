@@ -17,7 +17,7 @@
             android:name=".SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".ListView_PastQueries"
+            android:name=".PastQueries"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

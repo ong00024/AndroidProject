@@ -7,8 +7,10 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,8 +37,8 @@ public class SearchActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPrefs;
     TextView result;
-    ArrayList<CovidData> covidList;
     private static final String TAG = "SEARCH_ACTIVITY";
+    private ProgressBar pb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +50,9 @@ public class SearchActivity extends AppCompatActivity {
 
         String savedStart = sharedPrefs.getString("from", "");
         String savedEnd = sharedPrefs.getString("to", "");
-        covidList = new ArrayList();
-        result = (TextView) findViewById(R.id.tv_result);
 
+        result = (TextView) findViewById(R.id.tv_result);
+        pb = findViewById(R.id.pb_search);
 
         EditText inputCountry = findViewById(R.id.inputCountry);
         EditText inputStartDate = findViewById(R.id.inputStartDate);
@@ -61,10 +63,11 @@ public class SearchActivity extends AppCompatActivity {
 
         Button search = findViewById(R.id.searchButton);
 
-        search.setOnClickListener(click -> {
+        search.setOnClickListener((View click) -> {
             if (inputCountry.getText().toString().isEmpty() || inputStartDate.getText().toString().isEmpty() || inputEndDate.getText().toString().isEmpty()) {
                 Toast.makeText(this, "You have to enter country and date!", Toast.LENGTH_LONG).show();
             } else {
+
                 Intent goToResult = new Intent(SearchActivity.this, ResultsActivity.class);
                 goToResult.putExtra("Searched Country", inputCountry.getText().toString());
                 goToResult.putExtra("Searched Date", inputStartDate.getText().toString());
@@ -73,6 +76,8 @@ public class SearchActivity extends AppCompatActivity {
                 saveSharedPrefs(inputCountry.getText().toString(), inputStartDate.getText().toString(), inputEndDate.getText().toString());
                 Toast.makeText(SearchActivity.this, getString(R.string.loadResults), Toast.LENGTH_LONG).show();
 
+                pb.setVisibility(View.VISIBLE);
+                pb.setProgress(0);
                 MyHTTPReq req = new MyHTTPReq();
                 String urlString = "https://api.covid19api.com/country/";
                 String country = inputCountry.getText().toString();
@@ -109,13 +114,16 @@ public class SearchActivity extends AppCompatActivity {
     private class MyHTTPReq extends AsyncTask<String, Integer, String> {
         static private final String TAG1 = "MyHTTPRequest";
 
+
         // returns type3, input is type 1
         @Override
         protected String doInBackground(String... args) {
             StringBuilder sBuild = new StringBuilder();
             Log.i(TAG1, "start of doInBg");
-            try {
 
+            try {
+                ArrayList<CovidData> covidList = new ArrayList();
+                publishProgress(25);
                 URL url = new URL(args[0]); //build the server connection
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
@@ -131,7 +139,7 @@ public class SearchActivity extends AppCompatActivity {
 
                 /* JSONObject theDocument = new JSONObject(text);
                 JSONArray covidArray = theDocument.getJSONArray(""); */
-
+                publishProgress( 50);
                 for (int j = 0; j < covidArray.length(); j++) {
 
                     JSONObject objPos = covidArray.getJSONObject(j);
@@ -155,21 +163,20 @@ public class SearchActivity extends AppCompatActivity {
                 }
                 Log.i(TAG1, "end of try in doInBg");
 
-
+                publishProgress(75);
             }   catch (IOException | JSONException e) {
                 Log.i(TAG1, e.getMessage() + " exception in doInBg");
 
                 e.printStackTrace();
             }
-
+            publishProgress(100);
             return sBuild.toString();
         }
 
         //type2
-        public void onProgressUpdate(Integer ... args) {
-            // progress bar?
+        protected void onProgressUpdate(Integer ... values) {
             Log.i(TAG1, "onProgressUpdate");
-
+            pb.setProgress(values[0]);
         }
 
         // input is from doing type3
@@ -178,6 +185,7 @@ public class SearchActivity extends AppCompatActivity {
             Log.i(TAG1, "onPostExecute");
 
             result.setText(fromDoInBg);
+            pb.setVisibility(View.GONE);
 
         }
     }

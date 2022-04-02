@@ -4,6 +4,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * CovidOpener opens a database to store and retrieve previous queries
+ * @author Vincent, Kevin
+ */
 
 public class CovidOpener extends SQLiteOpenHelper {
 

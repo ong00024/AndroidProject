@@ -6,12 +6,13 @@ import android.os.Bundle;
 
 /**
  * Listview showing past queries saved in db
+ * Click on one item will bring up details of the queries.
  */
-public class ListView_PastQueries extends AppCompatActivity {
+public class PastQueries extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_view_pastqueries);
+        setContentView(R.layout.activity_pastqueries);
     }
 }
