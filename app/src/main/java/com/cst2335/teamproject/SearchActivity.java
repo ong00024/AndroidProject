@@ -49,7 +49,6 @@ public class SearchActivity extends AppCompatActivity {
         String savedStart = sharedPrefs.getString("from", "");
         String savedEnd = sharedPrefs.getString("to", "");
 
-        //result = (TextView) findViewById(R.id.tv_result);
         pb = findViewById(R.id.pb_search);
 
         EditText inputCountry = findViewById(R.id.inputCountry);
@@ -93,11 +92,16 @@ public class SearchActivity extends AppCompatActivity {
 
             }
 
-            //startActivity(goToResult); will utilize fragments
-
-
-
         });
+
+        /* view previous queries */
+        Button saved = findViewById(R.id.savedDates);
+
+        saved.setOnClickListener(goToSaved -> {
+            Intent toSaved = new Intent(SearchActivity.this, PastQueries.class);
+            startActivity(toSaved);
+        });
+
 
     }
 

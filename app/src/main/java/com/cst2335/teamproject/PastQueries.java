@@ -71,7 +71,6 @@ public class PastQueries extends AppCompatActivity {
             String countryQ = savedQs.getString(messageIndex);
             String fromQ = savedQs.getString(fromIndex);
             String toQ = savedQs.getString(toIndex);
-
             queries.add(new SavedQuery(countryQ, fromQ, toQ, idQ));
         }
         //save entry from results activity
@@ -124,6 +123,22 @@ public class PastQueries extends AppCompatActivity {
             return true;
         });
 
+        /*view details of query */
+        myList.setOnItemClickListener((list, view, position, id) -> {
+            Intent goToFragment = new Intent(PastQueries.this, EmptyActivity.class);
+            Cursor cursor = theDB.rawQuery("SELECT " +CovidOpener.COL_RESULTS +" from " + CovidOpener.TABLE_NAME + "WHERE _id = " + id + ";", null);
+            cursor.moveToFirst();
+            String displayQ = cursor.getString(0);
+
+            goToFragment.putExtra("id", (int) id);
+            goToFragment.putExtra("message", queries.get(position).toString());
+
+
+            goToFragment.putExtra("results", displayQ);
+            startActivity(goToFragment);
+
+        });
+
 
 
     }
@@ -163,8 +178,4 @@ public class PastQueries extends AppCompatActivity {
     }
 
 
-
-    public void addQueries(SavedQuery sQuery){
-        this.queries.add(sQuery);
-    }
 }
