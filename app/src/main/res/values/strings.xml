@@ -15,4 +15,8 @@
     <string name="results">results will show here </string>
     <string name="you_removed_toast">You removed item # </string>
 
+    <string name="frag_id_message">ID = </string>
+    <string name="fragment_title">Message Here</string>
+    <string name="hide_button">Hide</string>
+
 </resources>

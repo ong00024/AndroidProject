@@ -126,14 +126,14 @@ public class PastQueries extends AppCompatActivity {
         /*view details of query */
         myList.setOnItemClickListener((list, view, position, id) -> {
             Intent goToFragment = new Intent(PastQueries.this, EmptyActivity.class);
-            Cursor cursor = theDB.rawQuery("SELECT " +CovidOpener.COL_RESULTS +" from " + CovidOpener.TABLE_NAME + "WHERE _id = " + id + ";", null);
+            Cursor cursor = theDB.rawQuery("SELECT " +CovidOpener.COL_RESULTS +" from " + CovidOpener.TABLE_NAME + " WHERE _id=" + id + ";", null);
             cursor.moveToFirst();
-            String displayQ = cursor.getString(0);
+            int resultsIndex = cursor.getColumnIndex(CovidOpener.COL_RESULTS);
+
+            String displayQ = cursor.getString(resultsIndex);
 
             goToFragment.putExtra("id", (int) id);
             goToFragment.putExtra("message", queries.get(position).toString());
-
-
             goToFragment.putExtra("results", displayQ);
             startActivity(goToFragment);
 

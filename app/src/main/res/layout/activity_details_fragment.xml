@@ -1,0 +1,42 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/frame_layout" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/message_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_title"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/message_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/frag_id_message"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/query_results"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text=""
+            android:layout_weight="1"
+            android:gravity="top"/>
+
+        <Button
+            android:id="@+id/hide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hide_button"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/teal_200" />
+
+    </LinearLayout>
+</FrameLayout>
