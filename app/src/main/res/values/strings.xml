@@ -13,4 +13,6 @@
     <string name="yourResults">Your Results:</string>
     <string name="saveResults">Save Results</string>
     <string name="results">results will show here </string>
+    <string name="you_removed_toast">You removed item # </string>
+
 </resources>

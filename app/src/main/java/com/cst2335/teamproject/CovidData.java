@@ -1,11 +1,13 @@
 package com.cst2335.teamproject;
 
+import java.io.Serializable;
+
 /**
  * CovidData class stores information from each specific item from a query
  * @author Kevin Ong
  */
 
-public class CovidData {
+public class CovidData implements Serializable {
 
     String country;
     String countryCode;
@@ -44,7 +46,6 @@ public class CovidData {
         this.cases = 0;
         this.status = "confirmed";
         this.date = "";
-
     }
 
     public CovidData(String country, String countryCode, double lat, double lon, int cases, String status, String date) {
@@ -62,9 +63,7 @@ public class CovidData {
     }
 
     public String toString() {
-        String covidInfo = "";
-        covidInfo = String.format("On %s there were %d cases in %s", getDate(), cases, country);
-        return covidInfo;
+        return String.format("On %s there were %d cases in %s", getDate(), cases, country);
     }
 
     /* SETTERS AND GETTERS -------------------------------------*/

@@ -109,18 +109,18 @@ public class SearchActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    private class MyHTTPReq extends AsyncTask<String, Integer, String> {
-        static private final String TAG1 = "MyHTTPRequest";
+    private class MyHTTPReq extends AsyncTask<String, Integer, ArrayList<CovidData>> {
+        private static final String TAG1 = "MyHTTPRequest";
 
 
         // returns type3, input is type 1
         @Override
-        protected String doInBackground(String... args) {
+        protected ArrayList<CovidData> doInBackground(String... args) {
             StringBuilder sBuild = new StringBuilder();
             Log.i(TAG1, "start of doInBg");
+            ArrayList<CovidData> covidList = new ArrayList();
 
             try {
-                ArrayList<CovidData> covidList = new ArrayList();
                 publishProgress(25);
                 URL url = new URL(args[0]); //build the server connection
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -156,9 +156,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
                 }
-                for (int k = 0; k < covidList.size(); k++) {
-                    sBuild.append(covidList.get(k).toString() + " \n");
-                }
+
                 Log.i(TAG1, "end of try in doInBg");
 
                 publishProgress(75);
@@ -168,7 +166,8 @@ public class SearchActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             publishProgress(100);
-            return sBuild.toString();
+            return covidList;
+            //return sBuild.toString();
         }
 
         //type2
@@ -178,7 +177,7 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         // input is from doing type3
-        public void onPostExecute(String fromDoInBg) {
+        public void onPostExecute(ArrayList<CovidData> fromDoInBg) {
             //update GUI
             Log.i(TAG1, "onPostExecute");
             pb.setVisibility(View.GONE);

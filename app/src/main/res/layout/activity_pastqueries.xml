@@ -5,6 +5,8 @@
     android:orientation="vertical">
 
 <!-- This List view is used to display past queries -->
+
+
     <ListView
         android:id="@+id/theListView"
         android:layout_width="match_parent"
