@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -36,7 +35,6 @@ import java.util.ArrayList;
 public class SearchActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPrefs;
-    TextView result;
     private static final String TAG = "SEARCH_ACTIVITY";
     private ProgressBar pb;
 
@@ -51,7 +49,7 @@ public class SearchActivity extends AppCompatActivity {
         String savedStart = sharedPrefs.getString("from", "");
         String savedEnd = sharedPrefs.getString("to", "");
 
-        result = (TextView) findViewById(R.id.tv_result);
+        //result = (TextView) findViewById(R.id.tv_result);
         pb = findViewById(R.id.pb_search);
 
         EditText inputCountry = findViewById(R.id.inputCountry);
@@ -70,8 +68,8 @@ public class SearchActivity extends AppCompatActivity {
 
                 Intent goToResult = new Intent(SearchActivity.this, ResultsActivity.class);
                 goToResult.putExtra("Searched Country", inputCountry.getText().toString());
-                goToResult.putExtra("Searched Date", inputStartDate.getText().toString());
-                goToResult.putExtra("Searched Date", inputStartDate.getText().toString());
+                goToResult.putExtra("Searched Start Date", inputStartDate.getText().toString());
+                goToResult.putExtra("Searched End Date", inputEndDate.getText().toString());
 
                 saveSharedPrefs(inputCountry.getText().toString(), inputStartDate.getText().toString(), inputEndDate.getText().toString());
                 Toast.makeText(SearchActivity.this, getString(R.string.loadResults), Toast.LENGTH_LONG).show();
@@ -183,9 +181,12 @@ public class SearchActivity extends AppCompatActivity {
         public void onPostExecute(String fromDoInBg) {
             //update GUI
             Log.i(TAG1, "onPostExecute");
-
-            result.setText(fromDoInBg);
             pb.setVisibility(View.GONE);
+
+            Intent goToResult= new Intent(SearchActivity.this, ResultsActivity.class);
+            goToResult.putExtra("Result", fromDoInBg);
+
+            startActivity(goToResult);
 
         }
     }

@@ -10,6 +10,7 @@
     <string name="dateHint">Enter a date (YYYY-MM-DD)</string>
     <string name="loadResults">Loading results</string>
     <string name="savedDates">Saved Dates</string>
-
+    <string name="yourResults">Your Results:</string>
+    <string name="saveResults">Save Results</string>
     <string name="results">results will show here </string>
 </resources>
