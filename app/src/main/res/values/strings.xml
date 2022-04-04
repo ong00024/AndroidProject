@@ -14,5 +14,24 @@
     <string name="saveResults">Save Results</string>
     <string name="results">results will show here </string>
     <string name="you_removed_toast">You removed item # </string>
+    <string name="help">Help</string>
+    <string name="startPage">Start Page</string>
+    <string name="savedPage">Saved Results</string>
+    <string name="searchPage">Search Page</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="howTo">How to use:</string>
+    <string name="clickHelp">You clicked for help</string>
+    <string name="searchHelp">For info on Covid cases, enter a country, start date, and end date into the respective inputs.
+        Ensure that the format of the date is \'YYY-MM-DD\'.
+        Once query is entered, clicking the SEARCH button will take you to the Results page.
+        You can see your saved data by clicking on the SAVED DATES button.</string>
+    <string name="resultHelp">This page contains the results of your query.
+        Clicking the SAVE RESULTS button will save your result and take you to the Saved Results page.</string>
+    <string name="savedHelp">This page contains your saved queries.
+        By clicking a saved query you will see the details of that query.
+        By clicking and holding a query you will be prompted with an option to delete the query.</string>
+    <string name="onSearchPage">You are on the Search Page</string>
+    <string name="onSavedPage">You are on the Saved Queries Page</string>
 
 </resources>
