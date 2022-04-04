@@ -1,17 +1,30 @@
 package com.cst2335.teamproject;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +45,7 @@ import java.util.ArrayList;
  * @author Kevin Ong, Vincent Zheng
  * @version 1.0
  */
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private SharedPreferences sharedPrefs;
     private static final String TAG = "SEARCH_ACTIVITY";
@@ -57,6 +70,22 @@ public class SearchActivity extends AppCompatActivity {
         inputCountry.setText(savedCountry);
         inputStartDate.setText(savedStart);
         inputEndDate.setText(savedEnd);
+
+        //Gets toolbar from the layout
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.getOverflowIcon().setColorFilter(Color.WHITE,  PorterDuff.Mode.SRC_ATOP);
+
+        //For NavigationDrawer
+        DrawerLayout drawer = findViewById(R.id.drawer);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.open, R.string.close);
+        toggle.getDrawerArrowDrawable().setColorFilter(Color.WHITE,  PorterDuff.Mode.SRC_ATOP);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navView = findViewById(R.id.nav_view);
+        navView.setNavigationItemSelectedListener(this);
 
         Button search = findViewById(R.id.searchButton);
 
@@ -87,7 +116,7 @@ public class SearchActivity extends AppCompatActivity {
                 makeUrl.append("T00:00:00Z&to=");
                 makeUrl.append(endDate);
                 makeUrl.append("T00:00:00Z");
-                Log.i(TAG, "url is <" + makeUrl.toString()+ ">");
+                Log.i(TAG, "url is <" + makeUrl.toString() + ">");
                 req.execute(makeUrl.toString());
 
             }
@@ -105,12 +134,61 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    private void saveSharedPrefs(String savedCountry, String savedStart, String savedEnd){
+    private void saveSharedPrefs(String savedCountry, String savedStart, String savedEnd) {
         SharedPreferences.Editor editor = sharedPrefs.edit();
         editor.putString("Country", savedCountry);
         editor.putString("from", savedStart);
         editor.putString("to", savedEnd);
         editor.apply();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String toast = null;
+        //What actions occur when the menu item is selected
+        if (item.getItemId() == R.id.help) {
+            toast = getString(R.string.clickHelp);
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle(R.string.howTo)
+                    .setMessage(getResources().getString(R.string.searchHelp))
+                    .setNeutralButton("OK", (click, b) -> {
+                    })
+                    .create().show();
+        }
+        Toast.makeText(this, toast, Toast.LENGTH_LONG).show();
+        return true;
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        Intent nextActivity;
+        switch(item.getItemId())
+        {
+            case R.id.itemStart:
+                finish();
+                break;
+
+            case R.id.itemSearch:
+                Toast.makeText(this, R.string.onSearchPage, Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.itemSaved:
+                nextActivity = new Intent(SearchActivity.this, PastQueries.class);
+                startActivity(nextActivity);
+                break;
+        }
+
+        return true;
     }
 
     private class MyHTTPReq extends AsyncTask<String, Integer, ArrayList<CovidData>> {
@@ -133,15 +211,15 @@ public class SearchActivity extends AppCompatActivity {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"), 8);
                 StringBuilder sb = new StringBuilder();
                 String line = null;
-                while((line = reader.readLine()) != null) {
-                    sb.append(line+ "\n");
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
                 }
                 String text = sb.toString();
                 JSONArray covidArray = new JSONArray(text);
 
                 /* JSONObject theDocument = new JSONObject(text);
                 JSONArray covidArray = theDocument.getJSONArray(""); */
-                publishProgress( 50);
+                publishProgress(50);
                 for (int j = 0; j < covidArray.length(); j++) {
 
                     JSONObject objPos = covidArray.getJSONObject(j);
@@ -164,7 +242,7 @@ public class SearchActivity extends AppCompatActivity {
                 Log.i(TAG1, "end of try in doInBg");
 
                 publishProgress(75);
-            }   catch (IOException | JSONException e) {
+            } catch (IOException | JSONException e) {
                 Log.i(TAG1, e.getMessage() + " exception in doInBg");
 
                 e.printStackTrace();
@@ -175,7 +253,7 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         //type2
-        protected void onProgressUpdate(Integer ... values) {
+        protected void onProgressUpdate(Integer... values) {
             Log.i(TAG1, "onProgressUpdate");
             pb.setProgress(values[0]);
         }
@@ -186,11 +264,12 @@ public class SearchActivity extends AppCompatActivity {
             Log.i(TAG1, "onPostExecute");
             pb.setVisibility(View.GONE);
 
-            Intent goToResult= new Intent(SearchActivity.this, ResultsActivity.class);
+            Intent goToResult = new Intent(SearchActivity.this, ResultsActivity.class);
             goToResult.putExtra("Result", fromDoInBg);
 
             startActivity(goToResult);
 
         }
     }
+
 }

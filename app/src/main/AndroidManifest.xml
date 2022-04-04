@@ -14,18 +14,25 @@
         android:theme="@style/Theme.AndroidProject">
         <activity
             android:name=".ResultsActivity"
-            android:exported="false" />
+            android:label="Results"
+            android:exported="false"
+            android:theme="@style/Theme.noActionBar"/>
         <activity
             android:name=".SearchActivity"
-            android:exported="false" />
+            android:label="Search Page"
+            android:exported="false"
+            android:theme="@style/Theme.noActionBar"/>
         <activity
             android:name=".EmptyActivity"
             android:exported="false" />
         <activity
             android:name=".PastQueries"
-            android:exported="false" />
+            android:label="Saved Queries"
+            android:exported="false"
+            android:theme="@style/Theme.noActionBar"/>
         <activity
             android:name=".MainActivity"
+            android:label="Covid-19 Application"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
