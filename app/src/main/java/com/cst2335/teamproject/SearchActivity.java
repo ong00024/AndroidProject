@@ -89,10 +89,12 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
 
         Button search = findViewById(R.id.searchButton);
 
+
         search.setOnClickListener((View click) -> {
             if (inputCountry.getText().toString().isEmpty() || inputStartDate.getText().toString().isEmpty() || inputEndDate.getText().toString().isEmpty()) {
                 Toast.makeText(this, "You have to enter country and date!", Toast.LENGTH_LONG).show();
-            } else {
+
+            }   else {
 
                 Intent goToResult = new Intent(SearchActivity.this, ResultsActivity.class);
                 goToResult.putExtra("Searched Country", inputCountry.getText().toString());
@@ -225,6 +227,7 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
                     JSONObject objPos = covidArray.getJSONObject(j);
                     String country = objPos.getString("Country");
                     String countryCode = objPos.getString("CountryCode");
+                    String province = objPos.getString("Province");
                     double lat = objPos.getDouble("Lat");
                     double lon = objPos.getDouble("Lon");
                     int cases = objPos.getInt("Cases");
@@ -233,6 +236,9 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
 
 
                     CovidData covidIn = new CovidData(country, countryCode, lat, lon, cases, status, date);
+                    if(!province.isEmpty()){
+                        covidIn.setProvince(province);
+                    }
 
                     covidList.add(covidIn);
 

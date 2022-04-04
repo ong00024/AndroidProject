@@ -62,7 +62,6 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
         String fromDate;
         String toDate;
         String results;
-        SavedQuery sq = new SavedQuery();
 
         myOpener = new CovidOpener(this);
         theDB = myOpener.getWritableDatabase();
@@ -88,21 +87,26 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
         navView.setNavigationItemSelectedListener(this);
 
         //load previously saved db entries
+        Log.i(TAG, "select * query");
         savedQs = theDB.rawQuery("SELECT * from " + CovidOpener.TABLE_NAME + ";", null);
         int idIndex = savedQs.getColumnIndex(CovidOpener.COL_ID);
-        int messageIndex = savedQs.getColumnIndex(CovidOpener.COL_MESSAGE);
+        int countryIndex = savedQs.getColumnIndex(CovidOpener.COL_COUNTRY);
         int fromIndex = savedQs.getColumnIndex(CovidOpener.COL_FROM_DATE);
         int toIndex = savedQs.getColumnIndex(CovidOpener.COL_TO_DATE);
 
         while (savedQs.moveToNext()) {
+            Log.i(TAG, "moveToNext");
             long idQ = (long) savedQs.getInt(idIndex);
-            String countryQ = savedQs.getString(messageIndex);
+            String countryQ = savedQs.getString(countryIndex);
             String fromQ = savedQs.getString(fromIndex);
             String toQ = savedQs.getString(toIndex);
             queries.add(new SavedQuery(countryQ, fromQ, toQ, idQ));
         }
+
         //save entry from results activity
         if (fromResults.getStringExtra("country") != null) {
+            SavedQuery sq = new SavedQuery();
+
             Log.i(TAG, "inserting to db...");
             country = fromResults.getStringExtra("country");
             size = fromResults.getIntExtra("days", 0);
@@ -166,9 +170,6 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
             startActivity(goToFragment);
 
         });
-
-
-
     }
 
     @Override
@@ -248,7 +249,7 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
             newV = inflater.inflate(R.layout.activity_pastquery, parent, false);
             tView = newV.findViewById(R.id.query);
 
-            tView.setText(((SavedQuery) getItem(position)).toString());
+            tView.setText(getItem(position).toString());
 
             return newV;
         }

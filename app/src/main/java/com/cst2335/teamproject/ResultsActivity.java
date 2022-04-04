@@ -14,6 +14,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -46,6 +47,7 @@ public class ResultsActivity extends AppCompatActivity implements NavigationView
         StringBuilder sBuild = new StringBuilder();
         theDB = myOpener.getWritableDatabase();
         TextView viewResults = findViewById(R.id.tv_result);
+        viewResults.setMovementMethod(new ScrollingMovementMethod());
         ArrayList<CovidData> results;
         results = (ArrayList<CovidData>) getIntent().getSerializableExtra("Result");
 
@@ -89,9 +91,6 @@ public class ResultsActivity extends AppCompatActivity implements NavigationView
             saveToPastQueries.putExtra("toDate", to);
             saveToPastQueries.putExtra("results", sBuild.toString());
             startActivity(saveToPastQueries);
-
-
-
 
         });
 

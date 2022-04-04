@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,7 @@ public class DetailsFragment extends Fragment {
         messageDetails = (TextView) view.findViewById(R.id.message_title);
         msgId = view.findViewById(R.id.message_id);
         resultsDetails = view.findViewById(R.id.query_results);
+        resultsDetails.setMovementMethod(new ScrollingMovementMethod());
         hide = (Button) view.findViewById(R.id.hide);
 
         messageDetails.setText(msgDetails);

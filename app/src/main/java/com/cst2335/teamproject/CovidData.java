@@ -63,7 +63,14 @@ public class CovidData implements Serializable {
     }
 
     public String toString() {
-        return String.format("On %s there were %d cases in %s", getDate(), cases, country);
+        String statement;
+
+        if (getProvince().isEmpty()){
+            statement = String.format("On %s : %d %s case(s) in %s", getDate(), cases, status, country);
+        } else {
+            statement = String.format("On %s : %d %s case(s) in %s, %s", getDate(), cases, status, province, country);
+        }
+        return statement;
     }
 
     /* SETTERS AND GETTERS -------------------------------------*/

@@ -35,8 +35,10 @@ public class SavedQuery {
 
     public void setId(long id) {              this.id = id;             }
 
+
     @Override
     public String toString() {
+
         return String.format("Cases in %s from %s to %s", getCountry(), getFrom(), getTo());
     }
 
