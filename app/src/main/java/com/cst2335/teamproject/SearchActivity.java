@@ -19,6 +19,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -38,6 +40,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Search Activity.
@@ -64,20 +67,30 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
 
         pb = findViewById(R.id.pb_search);
 
-        EditText inputCountry = findViewById(R.id.inputCountry);
+        /*
+         * Vincent
+         * Using AutoCompleteTextView provides auto-complete suggestions for when users enter a Country.
+         * StringArray is a list of countries taken from the Covid api.
+         */
+        AutoCompleteTextView inputCountry = findViewById(R.id.inputCountry);
+        String[] countries = getResources().getStringArray(R.array.countries);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, countries);
+        inputCountry.setAdapter(adapter);
+        //EditText values
         EditText inputStartDate = findViewById(R.id.inputStartDate);
         EditText inputEndDate = findViewById(R.id.inputEndDate);
         inputCountry.setText(savedCountry);
         inputStartDate.setText(savedStart);
         inputEndDate.setText(savedEnd);
 
-        //Gets toolbar from the layout
+        /*
+         * Toolbar and DrawerLayout
+         */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.getOverflowIcon().setColorFilter(Color.WHITE,  PorterDuff.Mode.SRC_ATOP);
 
-        //For NavigationDrawer
         DrawerLayout drawer = findViewById(R.id.drawer);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.open, R.string.close);
         toggle.getDrawerArrowDrawable().setColorFilter(Color.WHITE,  PorterDuff.Mode.SRC_ATOP);
@@ -144,6 +157,12 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
         editor.apply();
     }
 
+    /**
+     * Menu items placed onto inflated menu
+     * @author Vincent
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -151,12 +170,17 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
         return true;
     }
 
-    @SuppressLint("NonConstantResourceId")
+    /**
+     * Called whenever user selects a menu icon from the toolbar
+     * @author Vincent
+     * @param item item that user selected
+     * @return a boolean value
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         String toast = null;
-        //What actions occur when the menu item is selected
         if (item.getItemId() == R.id.help) {
+            /*When help is clicked an AlertDialog opens to give instructions on how to use the activity*/
             toast = getString(R.string.clickHelp);
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle(R.string.howTo)
@@ -169,10 +193,16 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
         return true;
     }
 
-    @SuppressLint("NonConstantResourceId")
+
+    /**
+     * Called whenever user selects a menu icon from the navigation drawer.
+     * @Author Vincent
+     * @param item the item that the user selected
+     * @return a boolean value
+     */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
+        /*Navigates to chosen activity*/
         Intent nextActivity;
         switch(item.getItemId())
         {

@@ -70,13 +70,14 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
         theAdaptor = new MyListAdapter();
         myList.setAdapter(theAdaptor);
 
-        //Gets toolbar from the layout
+        /* Vincent
+         * Toolbar and DrawerLayout
+         */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.getOverflowIcon().setColorFilter(Color.WHITE,  PorterDuff.Mode.SRC_ATOP);
 
-        //For NavigationDrawer
         DrawerLayout drawer = findViewById(R.id.drawer);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.open, R.string.close);
         toggle.getDrawerArrowDrawable().setColorFilter(Color.WHITE,  PorterDuff.Mode.SRC_ATOP);
@@ -172,6 +173,12 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
         });
     }
 
+    /**
+     * Menu items placed onto inflated menu
+     * @author Vincent
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -179,12 +186,17 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
         return true;
     }
 
-    @SuppressLint("NonConstantResourceId")
+    /**
+     * Called whenever user selects a menu icon from the toolbar
+     * @author Vincent
+     * @param item item that user selected
+     * @return a boolean value
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         String toast = null;
-        //What actions occur when the menu item is selected
         if (item.getItemId() == R.id.help) {
+            /*When help is clicked an AlertDialog opens to give instructions on how to use the activity*/
             toast = getString(R.string.clickHelp);
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle(R.string.howTo)
@@ -197,10 +209,15 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
         return true;
     }
 
-    @SuppressLint("NonConstantResourceId")
+    /**
+     * Called whenever user selects a menu icon from the navigation drawer.
+     * @Author Vincent
+     * @param item the item that the user selected
+     * @return a boolean value
+     */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
+        /*Navigates to chosen activity*/
         Intent nextActivity;
         switch(item.getItemId())
         {

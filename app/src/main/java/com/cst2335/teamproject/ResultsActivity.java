@@ -51,13 +51,12 @@ public class ResultsActivity extends AppCompatActivity implements NavigationView
         ArrayList<CovidData> results;
         results = (ArrayList<CovidData>) getIntent().getSerializableExtra("Result");
 
-        //Gets toolbar from the layout
+        /*Toolbar and Navigation Drawer*/
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.getOverflowIcon().setColorFilter(Color.WHITE,  PorterDuff.Mode.SRC_ATOP);
 
-        //For NavigationDrawer
         DrawerLayout drawer = findViewById(R.id.drawer);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.open, R.string.close);
         toggle.getDrawerArrowDrawable().setColorFilter(Color.WHITE,  PorterDuff.Mode.SRC_ATOP);
@@ -82,20 +81,38 @@ public class ResultsActivity extends AppCompatActivity implements NavigationView
 
         String message = String.format("Cases in %s from %s to %s", country, from, to);
 
+        /* Vincent
+         * AlertDialog comes up when user clicks save results button. Option to save the result or cancel.
+         */
         saveResult.setOnClickListener(save -> {
-            Intent saveToPastQueries = new Intent(ResultsActivity.this, PastQueries.class);
-            saveToPastQueries.putExtra("days", size);
-            saveToPastQueries.putExtra("country", country);
-            saveToPastQueries.putExtra("message", message);
-            saveToPastQueries.putExtra("fromDate", from);
-            saveToPastQueries.putExtra("toDate", to);
-            saveToPastQueries.putExtra("results", sBuild.toString());
-            startActivity(saveToPastQueries);
+            AlertDialog.Builder alert = new AlertDialog.Builder(ResultsActivity.this);
+            alert.setTitle(R.string.wantToSave);
+            alert.setPositiveButton(R.string.yes,(click, yes)-> {
+                Intent saveToPastQueries = new Intent(ResultsActivity.this, PastQueries.class);
+                saveToPastQueries.putExtra("days", size);
+                saveToPastQueries.putExtra("country", country);
+                saveToPastQueries.putExtra("message", message);
+                saveToPastQueries.putExtra("fromDate", from);
+                saveToPastQueries.putExtra("toDate", to);
+                saveToPastQueries.putExtra("results", sBuild.toString());
+                startActivity(saveToPastQueries);
+
+            });
+
+            alert.setNegativeButton(R.string.cancel, (click, no) ->{ })
+                    .create().show();
+
 
         });
 
     }
 
+    /**
+     * Menu items placed onto inflated menu
+     * @author Vincent
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -103,11 +120,16 @@ public class ResultsActivity extends AppCompatActivity implements NavigationView
         return true;
     }
 
-    @SuppressLint("NonConstantResourceId")
+    /**
+     * Called whenever user selects a menu icon from the toolbar
+     * @author Vincent
+     * @param item item that user selected
+     * @return a boolean value
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         String toast = null;
-        //What actions occur when the menu item is selected
+        /*When help is clicked an AlertDialog opens to give instructions on how to use the activity*/
         if (item.getItemId() == R.id.help) {
             toast = getString(R.string.clickHelp);
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -121,10 +143,15 @@ public class ResultsActivity extends AppCompatActivity implements NavigationView
         return true;
     }
 
-    @SuppressLint("NonConstantResourceId")
+    /**
+     * Called whenever user selects a menu icon from the navigation drawer.
+     * @Author Vincent
+     * @param item the item that the user selected
+     * @return a boolean value
+     */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
+        /*Navigates to chosen activity*/
         Intent nextActivity;
         switch(item.getItemId())
         {

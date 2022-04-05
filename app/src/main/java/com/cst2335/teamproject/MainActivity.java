@@ -9,7 +9,7 @@ import android.widget.Button;
 /**
  * Main activity user will see when first opening app.
  *
- * @author Kevin Ong, Vincent Zheng, Minh Trung Do
+ * @author Kevin Ong, Vincent Zheng
  * @version 1.0
  */
 

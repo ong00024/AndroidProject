@@ -38,4 +38,7 @@
     <string name="fragment_title">Message Here</string>
     <string name="hide_button">Hide</string>
 
+    <string name="wantToSave">Do you want to save this query?</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
 </resources>

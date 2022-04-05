@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/country" />
 
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/inputCountry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

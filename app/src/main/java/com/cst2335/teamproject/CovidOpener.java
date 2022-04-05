@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * CovidOpener opens a database to store and retrieve previous queries
  *
- * @author Vincent, Kevin
+ * @author Vincent Zheng, Kevin Ong
  */
 
 public class CovidOpener extends SQLiteOpenHelper {
@@ -36,6 +36,7 @@ public class CovidOpener extends SQLiteOpenHelper {
 
         db.execSQL(create);
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
