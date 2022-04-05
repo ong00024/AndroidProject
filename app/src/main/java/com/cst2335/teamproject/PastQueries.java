@@ -35,8 +35,10 @@ import java.util.ArrayList;
  * Listview showing past queries saved in db
  * Click on one item will bring up details of the queries.
  * Long click on item to prompt delete.
- *
+ * Tool bar provides help instructions
+ * Navigation drawer can allow for navigating between activities
  * @author Kevin Ong, Vincent Zheng
+ * @version 1.0
  */
 
 public class PastQueries extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -88,7 +90,6 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
         navView.setNavigationItemSelectedListener(this);
 
         //load previously saved db entries
-        Log.i(TAG, "select * query");
         savedQs = theDB.rawQuery("SELECT * from " + CovidOpener.TABLE_NAME + ";", null);
         int idIndex = savedQs.getColumnIndex(CovidOpener.COL_ID);
         int countryIndex = savedQs.getColumnIndex(CovidOpener.COL_COUNTRY);
@@ -104,11 +105,10 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
             queries.add(new SavedQuery(countryQ, fromQ, toQ, idQ));
         }
 
-        //save entry from results activity
+        /* save entry from results activity */
         if (fromResults.getStringExtra("country") != null) {
             SavedQuery sq = new SavedQuery();
 
-            Log.i(TAG, "inserting to db...");
             country = fromResults.getStringExtra("country");
             size = fromResults.getIntExtra("days", 0);
             message = fromResults.getStringExtra("message");
@@ -131,7 +131,6 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
             sq.setTo(toDate);
             queries.add(sq);
             theAdaptor.notifyDataSetChanged();
-            Log.i(TAG, "end of insert, adapter  notified");
         }
 
         /* prompt user with delete option if item is clicked and held */
@@ -164,6 +163,7 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
             int resultsIndex = cursor.getColumnIndex(CovidOpener.COL_RESULTS);
 
             String displayQ = cursor.getString(resultsIndex);
+            cursor.close();
 
             goToFragment.putExtra("id", (int) id);
             goToFragment.putExtra("message", queries.get(position).toString());
@@ -176,8 +176,8 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
     /**
      * Menu items placed onto inflated menu
      * @author Vincent
-     * @param menu
-     * @return
+     * @param menu options for toolbar
+     * @return true
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -211,7 +211,7 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
 
     /**
      * Called whenever user selects a menu icon from the navigation drawer.
-     * @Author Vincent
+     * @author Vincent
      * @param item the item that the user selected
      * @return a boolean value
      */
@@ -235,10 +235,14 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
                 Toast.makeText(this, R.string.onSavedPage, Toast.LENGTH_LONG).show();
                 break;
         }
-
         return true;
     }
 
+    /**
+     * Each item in the arraylist of saved queries is represented in the list view,
+     * which contains individual text views inflated through this
+     * @author Kevin Ong
+     */
     public class MyListAdapter extends BaseAdapter {
 
         @Override
@@ -272,6 +276,5 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
         }
 
     }
-
 
 }

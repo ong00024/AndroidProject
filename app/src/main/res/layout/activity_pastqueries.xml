@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context=".PastQueries">
 
-    <!-- This List view is used to display past queries -->
+    <!--Kevin Ong, This List view is used to display past queries saved in database -->
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

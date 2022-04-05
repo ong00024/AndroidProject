@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  * CovidOpener opens a database to store and retrieve previous queries
  *
  * @author Vincent Zheng, Kevin Ong
+ * @version 1.0
  */
 
 public class CovidOpener extends SQLiteOpenHelper {

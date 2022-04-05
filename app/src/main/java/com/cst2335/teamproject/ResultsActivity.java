@@ -29,7 +29,7 @@ import java.util.ArrayList;
 /**
  * Result Activity.
  * Display results from search, and provide option to save to database/
- * @author Vincent Zheng, Kevin Ong
+ * @author Kevin Ong
  * @version 1.0
  */
 public class ResultsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -81,6 +81,7 @@ public class ResultsActivity extends AppCompatActivity implements NavigationView
 
         String message = String.format("Cases in %s from %s to %s", country, from, to);
 
+
         /* Vincent
          * AlertDialog comes up when user clicks save results button. Option to save the result or cancel.
          */
@@ -102,16 +103,14 @@ public class ResultsActivity extends AppCompatActivity implements NavigationView
             alert.setNegativeButton(R.string.cancel, (click, no) ->{ })
                     .create().show();
 
-
         });
-
     }
 
     /**
      * Menu items placed onto inflated menu
      * @author Vincent
-     * @param menu
-     * @return
+     * @param menu items to be used in menu
+     * @return true
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -145,7 +144,7 @@ public class ResultsActivity extends AppCompatActivity implements NavigationView
 
     /**
      * Called whenever user selects a menu icon from the navigation drawer.
-     * @Author Vincent
+     * @author Vincent
      * @param item the item that the user selected
      * @return a boolean value
      */

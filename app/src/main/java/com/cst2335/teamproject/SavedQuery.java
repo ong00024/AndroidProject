@@ -1,5 +1,10 @@
 package com.cst2335.teamproject;
 
+/**
+ * Previously saved queries are represented through this.
+ * @author Kevin Ong
+ * @version 1.0
+ */
 public class SavedQuery {
     String country;
     String from;
@@ -12,6 +17,7 @@ public class SavedQuery {
         this.to = to;
         this.id = id;
     }
+
     public SavedQuery() {
         this.country = "";
         this.from = "";

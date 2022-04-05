@@ -5,6 +5,7 @@ import java.io.Serializable;
 /**
  * CovidData class stores information from each specific item from a query
  * @author Kevin Ong
+ * @version 1.0
  */
 
 public class CovidData implements Serializable {
@@ -21,20 +22,9 @@ public class CovidData implements Serializable {
     String date;
 
 
-    public CovidData(String country, String countryCode, String province, String city, String cityCode, double lat,
-                     double lon, int cases, String status, String date) {
-        this.country = country;
-        this.countryCode = countryCode;
-        this.province = province;
-        this.city = city;
-        this.cityCode = cityCode;
-        this.lat = lat;
-        this.lon = lon;
-        this.cases = cases;
-        this.status = status;
-        this.date = date;
-    }
-
+    /**
+     * no arg constructor with Canada as default
+     */
     public CovidData() {
         this.country = "Canada";
         this.countryCode = "CA";
@@ -48,6 +38,16 @@ public class CovidData implements Serializable {
         this.date = "";
     }
 
+    /**
+     * Overloaded constructor
+     * @param country       Country searched
+     * @param countryCode   2 letter code
+     * @param lat           latitude
+     * @param lon           longitude
+     * @param cases         number of total cases recorded
+     * @param status        confirmed
+     * @param date          date in YYYY-MM-DD-T00:00:00Z
+     */
     public CovidData(String country, String countryCode, double lat, double lon, int cases, String status, String date) {
 
         this.country = country;
@@ -62,6 +62,7 @@ public class CovidData implements Serializable {
         this.date = date;
     }
 
+    @Override
     public String toString() {
         String statement;
 
@@ -147,6 +148,10 @@ public class CovidData implements Serializable {
         this.status = status;
     }
 
+    /**
+     * split date value and returns only the YYYY-MM-DD
+     * @return date - formatted without time stamp
+     */
     public String getDate() {
         String full = this.date;
         String[] parts = full.split("T");

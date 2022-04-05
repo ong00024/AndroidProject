@@ -8,6 +8,10 @@ import android.os.Bundle;
 
 /**
  * Empty Activity to be used for fragment showing listview details
+ * @author Kevin Ong
+ * @version 1.0
+ * @see DetailsFragment
+ * @see PastQueries
  */
 public class EmptyActivity extends AppCompatActivity {
 

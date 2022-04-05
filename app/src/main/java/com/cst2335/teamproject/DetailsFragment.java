@@ -11,6 +11,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * Used to display saved query results when listview item is clicked.
+ * @author Kevin Ong
+ * @version 1.0
+ * @see Fragment
+ * @see PastQueries
+ * @see ResultsActivity
+ */
 public class DetailsFragment extends Fragment {
 
     String qResults = "";
@@ -46,6 +54,7 @@ public class DetailsFragment extends Fragment {
 
     @Override
     public void onViewCreated( View view, Bundle savedInstanceState) {
+
         //set values
         messageDetails = (TextView) view.findViewById(R.id.message_title);
         msgId = view.findViewById(R.id.message_id);
@@ -58,6 +67,7 @@ public class DetailsFragment extends Fragment {
         msgId.setText(displayId);
         resultsDetails.setText(qResults);
 
+        // hide fragment acts as a back button, will remove fragment and terminate activity.
         hide.setOnClickListener( click -> {
             FragmentTransaction ft = getParentFragmentManager().beginTransaction();
             ft.setReorderingAllowed(true);

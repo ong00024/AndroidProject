@@ -9,7 +9,7 @@
 
     <string name="dateHint">Enter a date (YYYY-MM-DD)</string>
     <string name="loadResults">Loading results</string>
-    <string name="savedDates">Saved Dates</string>
+    <string name="savedDates">Previous Queries</string>
     <string name="yourResults">Your Results:</string>
     <string name="saveResults">Save Results</string>
     <string name="results">results will show here </string>
@@ -41,4 +41,6 @@
     <string name="wantToSave">Do you want to save this query?</string>
     <string name="yes">Yes</string>
     <string name="cancel">Cancel</string>
+    <string name="covid_19_app">Covid-19 App</string>
+    <string name="start">Start</string>
 </resources>

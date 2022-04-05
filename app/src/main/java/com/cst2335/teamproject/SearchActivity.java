@@ -236,6 +236,7 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
 
             try {
                 publishProgress(25);
+
                 URL url = new URL(args[0]); //build the server connection
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
@@ -249,8 +250,7 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
                 String text = sb.toString();
                 JSONArray covidArray = new JSONArray(text);
 
-                /* JSONObject theDocument = new JSONObject(text);
-                JSONArray covidArray = theDocument.getJSONArray(""); */
+
                 publishProgress(50);
                 for (int j = 0; j < covidArray.length(); j++) {
 
