@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AndroidProject</string>
+    <string name="search">検索</string>
+    <string name="country">国:</string>
+    <string name="countryHint">国を入力してください:</string>
+    <string name="start_date">開始日：</string>
+    <string name="end_date">終了日:</string>
+    <string name="must_enter">国と日付を入力する必要があります！</string>
+    <string name="wantToDel">国と日付を入力する必要があります！</string>
+    <string name="selectedRow">選択した行は次のとおりです:</string>
+    <string name="databaseId">データベースIDは次のとおりです:</string>
+
+    <string name="dateHint">日付を入力してください (YYYY-MM-DD)</string>
+    <string name="loadResults">結果の読み込み</string>
+    <string name="savedDates">以前のクエリ</string>
+    <string name="yourResults">あなたの結果:</string>
+    <string name="saveResults">結果を保存</string>
+    <string name="results">結果はここに表示されます</string>
+    <string name="you_removed_toast">アイテム番号を削除しました </string>
+    <string name="help">ヘルプ</string>
+    <string name="startPage">スタートページ</string>
+    <string name="savedPage">保存された結果</string>
+    <string name="searchPage">検索ページ</string>
+    <string name="open">開ける</string>
+    <string name="close">選ぶ</string>
+    <string name="howTo">使い方:</string>
+    <string name="clickHelp">あなたは助けを求めてクリックしました</string>
+    <string name="searchHelp">Covidの症例に関する情報については、国、開始日、および終了日をそれぞれの入力に入力してください。
+        日付の形式が次のとおりであることを確認してください \'YYY-MM-DD\'クエリを入力したら、[検索]ボタンをクリックすると[結果]ページに移動します。
+        [保存日]ボタンをクリックすると、保存したデータを表示できます.</string>
+    <string name="resultHelp">このページには、クエリの結果が含まれています。
+        [結果の保存]ボタンをクリックすると、結果が保存され、[保存された結果]ページに移動します。</string>
+    <string name="savedHelp">このページには、保存したクエリが含まれています。
+        保存したクエリをクリックすると、そのクエリの詳細が表示されます。
+        クエリをクリックして押したままにすると、クエリを削除するオプションが表示されます。</string>
+    <string name="onSearchPage">あなたは検索ページにいます</string>
+    <string name="onSavedPage">保存されたクエリページが表示されます</string>
+
+    <string name="frag_id_message">ID = </string>
+    <string name="fragment_title">ここにメッセージ</string>
+    <string name="hide_button">隠れる</string>
+
+    <string name="wantToSave">このクエリを保存しますか？</string>
+    <string name="yes">はい</string>
+    <string name="no">いいえ</string>
+    <string name="cancel">キャンセル</string>
+    <string name="covid_19_app">Covid-19アプリケーション</string>
+    <string name="start">始める</string>
+    <string name="info">情報</string>
+    <string name="clickInfo">あなたは情報のためにクリックしました</string>
+    <string name="covidTitle">COVID-19とは何ですか？</string>
+    <string name="covidDescription">コロナウイルス病（COVID-19）は、SARS-CoV-2ウイルスによって引き起こされる感染症です。
+    COVID-19で病気になったほとんどの人は、軽度から中等度の症状を経験し、特別な治療なしで回復します。
+        ただし、重病になり、医師の診察が必要な場合もあります。
+
+ウイルスは、感染した人が咳をしたり、くしゃみをしたり、話したり、歌ったり、呼吸したりすると、小さな液体の粒子で口や鼻から広がる可能性があります。
+        これらの粒子は、より大きな呼吸器飛沫からより小さなエアロゾルにまで及びます。
+COVID-19に感染している人の近くにいる場合は、ウイルスを吸い込んだり、汚染された表面に触れてから目、鼻、口に触れたりすることで感染する可能性があります。ウイルスは、屋内や混雑した環境でより簡単に広がります。</string>
+    <string name="ok">わかった</string>
+    <string name="startHelp">
+このアプリケーションを使用すると、世界中のCovid-19症例番号を検索して保存できます。開始するには、スタートを押してください！</string>
+    <string name="resultLabel">結果</string>
+    <string name="savedQueryLabel">保存されたクエリ</string>
+    <string name="covidLabel">COVID-19アプリケーション</string>
+    <string name="searchLabel">検索</string>
+</resources>

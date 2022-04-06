@@ -4,9 +4,9 @@
 <resources>
     <string-array name="countries" formatted="false" translatable="false">
         <item>ALA Aland Islands</item>
-        <item> Afghanistan</item>
+        <item>Afghanistan</item>
         <item>Albania</item>
-        <item> Algeria</item>
+        <item>Algeria</item>
         <item>American Samoa</item>
         <item>Andorra</item>
         <item>Angola</item>
@@ -72,7 +72,7 @@
         <item>Eritrea</item>
         <item>Estonia</item>
         <item>Ethiopia</item>
-        <item> Islands (Malvinas)</item>
+        <item>Islands (Malvinas)</item>
         <item>Faroe Islands</item>
         <item>Fiji</item>
         <item>Finland</item>
@@ -183,7 +183,7 @@
         <item>Puerto Rico</item>
         <item>Qatar</item>
         <item>Republic of Kosovo</item>
-        <item> Romania</item>
+        <item>Romania</item>
         <item>Russian Federation</item>
         <item>Rwanda</item>
         <item>Réunion</item>

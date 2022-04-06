@@ -88,7 +88,9 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
          */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //Sets title to white
         toolbar.setTitleTextColor(Color.WHITE);
+        //Sets overflow icon colour to white
         toolbar.getOverflowIcon().setColorFilter(Color.WHITE,  PorterDuff.Mode.SRC_ATOP);
 
         DrawerLayout drawer = findViewById(R.id.drawer);
@@ -105,7 +107,7 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
 
         search.setOnClickListener((View click) -> {
             if (inputCountry.getText().toString().isEmpty() || inputStartDate.getText().toString().isEmpty() || inputEndDate.getText().toString().isEmpty()) {
-                Toast.makeText(this, "You have to enter country and date!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.must_enter, Toast.LENGTH_LONG).show();
 
             }   else {
 
@@ -160,8 +162,8 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
     /**
      * Menu items placed onto inflated menu
      * @author Vincent
-     * @param menu
-     * @return
+     * @param menu options for toolbar
+     * @return true
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -174,20 +176,30 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
      * Called whenever user selects a menu icon from the toolbar
      * @author Vincent
      * @param item item that user selected
-     * @return a boolean value
+     * @return true
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         String toast = null;
-        if (item.getItemId() == R.id.help) {
-            /*When help is clicked an AlertDialog opens to give instructions on how to use the activity*/
-            toast = getString(R.string.clickHelp);
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setTitle(R.string.howTo)
-                    .setMessage(getResources().getString(R.string.searchHelp))
-                    .setNeutralButton("OK", (click, b) -> {
-                    })
-                    .create().show();
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        /*When help is clicked an AlertDialog opens to give instructions on how to use the activity*/
+        switch(item.getItemId())
+        {
+            case R.id.info:
+                toast = getString(R.string.clickInfo);
+                alertDialogBuilder.setTitle(R.string.covidTitle)
+                        .setMessage(R.string.covidDescription)
+                        .setNeutralButton(R.string.ok, (click, b) -> {
+                        }).create().show();
+                break;
+
+            case R.id.help:
+                toast = getString(R.string.clickHelp);
+                alertDialogBuilder.setTitle(R.string.howTo)
+                        .setMessage(getResources().getString(R.string.searchHelp))
+                        .setNeutralButton(R.string.ok, (click, b) -> {
+                        })
+                        .create().show();
         }
         Toast.makeText(this, toast, Toast.LENGTH_LONG).show();
         return true;
@@ -196,9 +208,9 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
 
     /**
      * Called whenever user selects a menu icon from the navigation drawer.
-     * @Author Vincent
+     * @author Vincent
      * @param item the item that the user selected
-     * @return a boolean value
+     * @return true
      */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -252,32 +264,35 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
 
 
                 publishProgress(50);
-                for (int j = 0; j < covidArray.length(); j++) {
 
-                    JSONObject objPos = covidArray.getJSONObject(j);
-                    String country = objPos.getString("Country");
-                    String countryCode = objPos.getString("CountryCode");
-                    String province = objPos.getString("Province");
-                    double lat = objPos.getDouble("Lat");
-                    double lon = objPos.getDouble("Lon");
-                    int cases = objPos.getInt("Cases");
-                    String status = objPos.getString("Status");
-                    String date = objPos.getString("Date");
+                    for (int j = 0; j < covidArray.length(); j++) {
+
+                        JSONObject objPos = covidArray.getJSONObject(j);
+                        String country = objPos.getString("Country");
+                        String countryCode = objPos.getString("CountryCode");
+                        String province = objPos.getString("Province");
+                        double lat = objPos.getDouble("Lat");
+                        double lon = objPos.getDouble("Lon");
+                        int cases = objPos.getInt("Cases");
+                        String status = objPos.getString("Status");
+                        String date = objPos.getString("Date");
 
 
-                    CovidData covidIn = new CovidData(country, countryCode, lat, lon, cases, status, date);
-                    if(!province.isEmpty()){
-                        covidIn.setProvince(province);
+                        CovidData covidIn = new CovidData(country, countryCode, lat, lon, cases, status, date);
+                        if(!province.isEmpty()){
+                            covidIn.setProvince(province);
+                        }
+
+                        covidList.add(covidIn);
+
+
                     }
 
-                    covidList.add(covidIn);
+                    Log.i(TAG1, "end of try in doInBg");
 
+                    publishProgress(75);
+                
 
-                }
-
-                Log.i(TAG1, "end of try in doInBg");
-
-                publishProgress(75);
             } catch (IOException | JSONException e) {
                 Log.i(TAG1, e.getMessage() + " exception in doInBg");
 

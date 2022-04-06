@@ -14,6 +14,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -77,7 +78,9 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
          */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //Sets title to white
         toolbar.setTitleTextColor(Color.WHITE);
+        //Sets overflow icon colour to white
         toolbar.getOverflowIcon().setColorFilter(Color.WHITE,  PorterDuff.Mode.SRC_ATOP);
 
         DrawerLayout drawer = findViewById(R.id.drawer);
@@ -140,12 +143,12 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
 
             AlertDialog.Builder builder = new AlertDialog.Builder(PastQueries.this);
 
-            builder.setTitle("Do you want to delete this?  \'" + whatWhatClicked.toString() + "\'")
-                    .setMessage("The selected row is: " + position +
-                            "\nThe database id is: " + myList.getItemIdAtPosition(position))
-                    .setNegativeButton("No", (dialog, click1) -> {
+            builder.setTitle(R.string.wantToDel +  "\'" + whatWhatClicked.toString() + "\'")
+                    .setMessage(R.string.selectedRow + position +
+                            "\n" + R.string.databaseId + myList.getItemIdAtPosition(position))
+                    .setNegativeButton(R.string.no, (dialog, click1) -> {
                     })
-                    .setPositiveButton("Yes", (dialog, click2) -> {
+                    .setPositiveButton(R.string.yes, (dialog, click2) -> {
                         queries.remove(position);
                         theAdaptor.notifyDataSetChanged();
                         Toast.makeText(this, getResources().getString(R.string.you_removed_toast) + position, Toast.LENGTH_LONG).show();
@@ -190,20 +193,30 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
      * Called whenever user selects a menu icon from the toolbar
      * @author Vincent
      * @param item item that user selected
-     * @return a boolean value
+     * @return true
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         String toast = null;
-        if (item.getItemId() == R.id.help) {
-            /*When help is clicked an AlertDialog opens to give instructions on how to use the activity*/
-            toast = getString(R.string.clickHelp);
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setTitle(R.string.howTo)
-                    .setMessage(getResources().getString(R.string.savedHelp))
-                    .setNeutralButton("OK", (click, b) -> {
-                    })
-                    .create().show();
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        /*When help is clicked an AlertDialog opens to give instructions on how to use the activity*/
+        switch(item.getItemId())
+        {
+            case R.id.info:
+                toast = getString(R.string.clickInfo);
+                alertDialogBuilder.setTitle(R.string.covidTitle)
+                        .setMessage(R.string.covidDescription)
+                        .setNeutralButton(R.string.ok, (click, b) -> {
+                        }).create().show();
+                break;
+
+            case R.id.help:
+                toast = getString(R.string.clickHelp);
+                alertDialogBuilder.setTitle(R.string.howTo)
+                        .setMessage(getResources().getString(R.string.savedHelp))
+                        .setNeutralButton(R.string.ok, (click, b) -> {
+                        })
+                        .create().show();
         }
         Toast.makeText(this, toast, Toast.LENGTH_LONG).show();
         return true;
@@ -213,7 +226,7 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
      * Called whenever user selects a menu icon from the navigation drawer.
      * @author Vincent
      * @param item the item that the user selected
-     * @return a boolean value
+     * @return true
      */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

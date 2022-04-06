@@ -8,7 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 
-import android.annotation.SuppressLint;
+
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -54,7 +54,9 @@ public class ResultsActivity extends AppCompatActivity implements NavigationView
         /*Toolbar and Navigation Drawer*/
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //Sets title to white
         toolbar.setTitleTextColor(Color.WHITE);
+        //Sets overflow icon colour to white
         toolbar.getOverflowIcon().setColorFilter(Color.WHITE,  PorterDuff.Mode.SRC_ATOP);
 
         DrawerLayout drawer = findViewById(R.id.drawer);
@@ -123,18 +125,28 @@ public class ResultsActivity extends AppCompatActivity implements NavigationView
      * Called whenever user selects a menu icon from the toolbar
      * @author Vincent
      * @param item item that user selected
-     * @return a boolean value
+     * @return true
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         String toast = null;
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         /*When help is clicked an AlertDialog opens to give instructions on how to use the activity*/
-        if (item.getItemId() == R.id.help) {
+        switch(item.getItemId())
+        {
+            case R.id.info:
+                toast = getString(R.string.clickInfo);
+                alertDialogBuilder.setTitle(R.string.covidTitle)
+                        .setMessage(R.string.covidDescription)
+                        .setNeutralButton(R.string.ok, (click, b) -> {
+                        }).create().show();
+                    break;
+
+            case R.id.help:
             toast = getString(R.string.clickHelp);
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle(R.string.howTo)
                     .setMessage(getResources().getString(R.string.resultHelp))
-                    .setNeutralButton("OK", (click, b) -> {
+                    .setNeutralButton(R.string.ok, (click, b) -> {
                     })
                     .create().show();
         }
@@ -146,7 +158,7 @@ public class ResultsActivity extends AppCompatActivity implements NavigationView
      * Called whenever user selects a menu icon from the navigation drawer.
      * @author Vincent
      * @param item the item that the user selected
-     * @return a boolean value
+     * @return true
      */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
