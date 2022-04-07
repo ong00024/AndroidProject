@@ -143,12 +143,12 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
 
             AlertDialog.Builder builder = new AlertDialog.Builder(PastQueries.this);
 
-            builder.setTitle(R.string.wantToDel +  "\'" + whatWhatClicked.toString() + "\'")
-                    .setMessage(R.string.selectedRow + position +
-                            "\n" + R.string.databaseId + myList.getItemIdAtPosition(position))
-                    .setNegativeButton(R.string.no, (dialog, click1) -> {
+            builder.setTitle("Do you want to delete this?  \'" + whatWhatClicked.toString() + "\'")
+                    .setMessage("The selected row is: " + position +
+                            "\nThe database id is: " + myList.getItemIdAtPosition(position))
+                    .setNegativeButton("No", (dialog, click1) -> {
                     })
-                    .setPositiveButton(R.string.yes, (dialog, click2) -> {
+                    .setPositiveButton("Yes", (dialog, click2) -> {
                         queries.remove(position);
                         theAdaptor.notifyDataSetChanged();
                         Toast.makeText(this, getResources().getString(R.string.you_removed_toast) + position, Toast.LENGTH_LONG).show();
@@ -157,7 +157,6 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
                     }).create().show();
             return true;
         });
-
         /*view details of query */
         myList.setOnItemClickListener((list, view, position, id) -> {
             Intent goToFragment = new Intent(PastQueries.this, EmptyActivity.class);
