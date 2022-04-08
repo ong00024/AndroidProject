@@ -198,9 +198,25 @@ public class PastQueries extends AppCompatActivity implements NavigationView.OnN
     public boolean onOptionsItemSelected(MenuItem item) {
         String toast = null;
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        /*When help is clicked an AlertDialog opens to give instructions on how to use the activity*/
+        /*Puts a case for every id in the menu XML */
         switch(item.getItemId())
         {
+            /*What actions occur when the menu item is selected*/
+            case R.id.searchMenu:
+                toast = getString(R.string.searchMenuToast);
+
+                alertDialogBuilder.setTitle(R.string.search)
+                        .setMessage(R.string.wantToSearch)
+                        .setPositiveButton(R.string.yes,(click, yes)-> {
+                            Intent goToSearch = new Intent(PastQueries.this, SearchActivity.class);
+                            startActivity(goToSearch);
+
+                        });
+
+                alertDialogBuilder.setNegativeButton(R.string.cancel, (click, no) ->{ })
+                        .create().show();
+                break;
+
             case R.id.info:
                 toast = getString(R.string.clickInfo);
                 alertDialogBuilder.setTitle(R.string.covidTitle)

@@ -2,11 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/searchMenu"
+        android:title="@string/search"
+        android:icon="@drawable/search"
+        android:orderInCategory="10"
+        app:showAsAction="always"/>
+
     <item android:id="@+id/info"
         android:title="@string/info"
         android:icon="@drawable/info"
+        android:orderInCategory="20"
         app:showAsAction="always"
         />
+
     <item android:id="@+id/help"
         android:title="@string/help"
         app:showAsAction="never"/>

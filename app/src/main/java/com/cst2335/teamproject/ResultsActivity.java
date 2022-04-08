@@ -131,15 +131,32 @@ public class ResultsActivity extends AppCompatActivity implements NavigationView
     public boolean onOptionsItemSelected(MenuItem item) {
         String toast = null;
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        /*When help is clicked an AlertDialog opens to give instructions on how to use the activity*/
+        /*Puts a case for every id in the menu XML */
         switch(item.getItemId())
         {
+            /*What actions occur when the menu item is selected*/
+            case R.id.searchMenu:
+                toast = getString(R.string.searchMenuToast);
+
+                alertDialogBuilder.setTitle(R.string.search)
+                        .setMessage(R.string.wantToSearch)
+                        .setPositiveButton(R.string.yes,(click, yes)-> {
+                            Intent goToSearch = new Intent(ResultsActivity.this, SearchActivity.class);
+                            startActivity(goToSearch);
+
+                        });
+
+                alertDialogBuilder.setNegativeButton(R.string.cancel, (click, no) ->{ })
+                        .create().show();
+                break;
+
             case R.id.info:
                 toast = getString(R.string.clickInfo);
                 alertDialogBuilder.setTitle(R.string.covidTitle)
                         .setMessage(R.string.covidDescription)
                         .setNeutralButton(R.string.ok, (click, b) -> {
                         }).create().show();
+
                     break;
 
             case R.id.help:
@@ -149,6 +166,8 @@ public class ResultsActivity extends AppCompatActivity implements NavigationView
                     .setNeutralButton(R.string.ok, (click, b) -> {
                     })
                     .create().show();
+
+            break;
         }
         Toast.makeText(this, toast, Toast.LENGTH_LONG).show();
         return true;

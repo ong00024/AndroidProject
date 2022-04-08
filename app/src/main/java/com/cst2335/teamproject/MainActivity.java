@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 /**
  * Main activity user will see when first opening app.
  *
@@ -73,9 +75,26 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         String toast = null;
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        /*When help is clicked an AlertDialog opens to give instructions on how to use the activity*/
+
+        /*Puts a case for every id in the menu XML */
         switch(item.getItemId())
         {
+            /*What actions occur when the menu item is selected*/
+            case R.id.searchMenu:
+                toast = getString(R.string.searchMenuToast);
+                alertDialogBuilder.setTitle(R.string.search)
+                        .setMessage(R.string.wantToSearch)
+                        .setPositiveButton(R.string.yes,(click, yes)-> {
+                Intent goToSearch = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(goToSearch);
+
+
+            });
+
+                alertDialogBuilder.setNegativeButton(R.string.cancel, (click, no) ->{ })
+                        .create().show();
+                break;
+
             case R.id.info:
                 toast = getString(R.string.clickInfo);
                 alertDialogBuilder.setTitle(R.string.covidTitle)
@@ -91,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
                         .setNeutralButton(R.string.ok, (click, b) -> {
                         })
                         .create().show();
+                break;
         }
         Toast.makeText(this, toast, Toast.LENGTH_LONG).show();
         return true;

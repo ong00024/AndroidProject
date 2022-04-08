@@ -28,7 +28,7 @@
     <string name="searchHelp">For info on Covid cases, enter a country, start date, and end date into the respective inputs.
         Ensure that the format of the date is \'YYY-MM-DD\'.
         Once query is entered, clicking the SEARCH button will take you to the Results page.
-        You can see your saved data by clicking on the SAVED DATES button.</string>
+        You can see your saved data by clicking on the PREVIOUS QUERIES button.</string>
     <string name="resultHelp">This page contains the results of your query.
         Clicking the SAVE RESULTS button will save your result and take you to the Saved Results page.</string>
     <string name="savedHelp">This page contains your saved queries.
@@ -65,4 +65,6 @@ You can be infected by breathing in the virus if you are near someone who has CO
     <string name="savedQueryLabel">Saved Queries</string>
     <string name="covidLabel">COVID-19 Application</string>
     <string name="searchLabel">Search</string>
+    <string name="searchMenuToast">You clicked the search icon</string>
+    <string name="wantToSearch">Do you want to go to the search activity?</string>
 </resources>

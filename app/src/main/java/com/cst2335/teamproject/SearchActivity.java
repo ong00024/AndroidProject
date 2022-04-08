@@ -27,6 +27,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -107,7 +108,7 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
 
         search.setOnClickListener((View click) -> {
             if (inputCountry.getText().toString().isEmpty() || inputStartDate.getText().toString().isEmpty() || inputEndDate.getText().toString().isEmpty()) {
-                Toast.makeText(this, R.string.must_enter, Toast.LENGTH_LONG).show();
+                Snackbar.make(findViewById(R.id.search_layout), R.string.must_enter, Snackbar.LENGTH_LONG).show();
 
             }   else {
 
@@ -182,9 +183,14 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
     public boolean onOptionsItemSelected(MenuItem item) {
         String toast = null;
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        /*When help is clicked an AlertDialog opens to give instructions on how to use the activity*/
+        /*Puts a case for every id in the menu XML */
         switch(item.getItemId())
         {
+            /*What actions occur when the menu item is selected*/
+            case R.id.searchMenu:
+                Toast.makeText(this, R.string.onSearchPage, Toast.LENGTH_LONG).show();
+                break;
+
             case R.id.info:
                 toast = getString(R.string.clickInfo);
                 alertDialogBuilder.setTitle(R.string.covidTitle)
@@ -200,6 +206,7 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
                         .setNeutralButton(R.string.ok, (click, b) -> {
                         })
                         .create().show();
+                break;
         }
         Toast.makeText(this, toast, Toast.LENGTH_LONG).show();
         return true;
@@ -219,7 +226,8 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
         switch(item.getItemId())
         {
             case R.id.itemStart:
-                finish();
+                nextActivity = new Intent(SearchActivity.this, MainActivity.class);
+                startActivity(nextActivity);
                 break;
 
             case R.id.itemSearch:

@@ -64,4 +64,6 @@ COVID-19に感染している人の近くにいる場合は、ウイルスを吸
     <string name="savedQueryLabel">保存されたクエリ</string>
     <string name="covidLabel">COVID-19アプリケーション</string>
     <string name="searchLabel">検索</string>
+    <string name="searchMenuToast">検索アイコンをクリックしました</string>
+    <string name="wantToSearch">検索アクティビティに移動しますか？</string>
 </resources>
