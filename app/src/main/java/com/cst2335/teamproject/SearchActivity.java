@@ -188,7 +188,7 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
         {
             /*What actions occur when the menu item is selected*/
             case R.id.searchMenu:
-                Toast.makeText(this, R.string.onSearchPage, Toast.LENGTH_LONG).show();
+                toast = getString(R.string.onSearchPage);
                 break;
 
             case R.id.info:
